@@ -55,35 +55,60 @@
         </div>
     </section>
 
-    <section class="recently-saved container">
-        <div class="section-header">
-            <h2>Recently saved</h2>
+    <section class="recently-saved" id="works">
+        <div class="section-header container">
+            <h2 class="underlined-title">Recently saved</h2>
             <a href="#" class="view-all">View all</a>
         </div>
-        <div class="portfolio-grid">
-            <div class="portfolio-card">
-                <div class="img-wrapper">
-                    <img src="https://placehold.co/400x500/e0e0e0/555555?text=Performance+Apparel"
-                        alt="Performance Apparel">
+
+        <div class="portfolio-content">
+            <div class="portfolio-carousel" id="portfolio-carousel">
+                <div class="portfolio-card">
+                    <img src="./assets/saved-image-1.png" alt="XTM Athletics" class="card-bg">
+                    <div class="portfolio-info">
+                        <span class="portfolio-title">XTM Athletics</span>
+                        <span class="portfolio-num">00</span>
+                    </div>
                 </div>
-            </div>
-            <div class="portfolio-card">
-                <div class="img-wrapper">
-                    <img src="https://placehold.co/400x500/e0e0e0/555555?text=Hot+Chocolate" alt="Hot Chocolate">
+                <div class="portfolio-card">
+                    <img src="./assets/saved-image-2.png" alt="Old Mercara" class="card-bg">
+                    <div class="portfolio-info">
+                        <span class="portfolio-title">Old Mercara</span>
+                        <span class="portfolio-num">00</span>
+                    </div>
                 </div>
-            </div>
-            <div class="portfolio-card">
-                <div class="img-wrapper">
-                    <img src="https://placehold.co/400x500/e0e0e0/555555?text=Desk+Setup" alt="Desk Setup">
+                <div class="portfolio-card">
+                    <img src="./assets/saved-image-3.png" class="card-bg">
+                    <div class="portfolio-info">
+                        <span class="portfolio-title">4 Degrees</span>
+                        <span class="portfolio-num">00</span>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <img src="./assets/saved-image-1.png" alt="Ezaar" class="card-bg">
+                    <div class="portfolio-info">
+                        <span class="portfolio-title">Ezaar</span>
+                        <span class="portfolio-num">00</span>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <img src="./assets/saved-image-2.png" alt="The Dosa Story" class="card-bg">
+                    <div class="portfolio-info">
+                        <span class="portfolio-title">The Dosa Story</span>
+                        <span class="portfolio-num">00</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="slider-indicator">
-            <p class="slider-text pink-text">Brand identity, packaging, website, UI/UX, social media marketing</p>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
+
+        <div class="portfolio-footer container">
+            <div class="portfolio-scrollbar-wrapper">
+                <div class="custom-scrollbar-container">
+                    <div class="custom-track">
+                        <div class="custom-thumb" id="portfolio-thumb"></div>
+                    </div>
+                </div>
             </div>
-            <p class="slider-count pink-text">01/05</p>
         </div>
     </section>
 
@@ -329,13 +354,13 @@
             // Portfolio Scrollbar Logic
             const pCarousel = document.getElementById('portfolio-carousel');
             const pThumb = document.getElementById('portfolio-thumb');
-            
+
             if (pCarousel && pThumb) {
                 function updatePScrollThumb() {
                     const maxScrollLeft = pCarousel.scrollWidth - pCarousel.clientWidth;
                     if (maxScrollLeft > 0) {
                         const scrollFraction = pCarousel.scrollLeft / maxScrollLeft;
-                        pThumb.style.transform = `translateX(${scrollFraction * 79}px)`; 
+                        pThumb.style.transform = `translateX(${scrollFraction * 79}px)`;
                     }
                 }
 
@@ -363,79 +388,17 @@
 
                 window.addEventListener('mouseup', () => {
                     pIsDragging = false;
-                    if(pThumb) pThumb.style.transition = 'transform 0.1s linear';
+                    if (pThumb) pThumb.style.transition = 'transform 0.1s linear';
                     document.body.style.userSelect = '';
                 });
             }
         });
     </script>
 
-    <section class="recently-saved" id="works">
-        <div class="section-header container">
-            <h2 class="underlined-title">Recently saved</h2>
-            <a href="#" class="view-all">View all</a>
-        </div>
-        
-        <div class="portfolio-content">
-            <div class="portfolio-carousel" id="portfolio-carousel">
-                <div class="portfolio-card">
-                    <img src="./assets/portfolio-1.jpg" onerror="this.src='https://placehold.co/400x500/e0e0e0/555555?text=XTM+Athletics'" alt="XTM Athletics" class="card-bg">
-                    <div class="portfolio-info">
-                        <span class="portfolio-title">XTM Athletics</span>
-                        <span class="portfolio-num">00</span>
-                    </div>
-                </div>
-                <div class="portfolio-card">
-                    <img src="./assets/portfolio-2.jpg" onerror="this.src='https://placehold.co/400x500/e0e0e0/555555?text=Old+Mercara'" alt="Old Mercara" class="card-bg">
-                    <div class="portfolio-info">
-                        <span class="portfolio-title">Old Mercara</span>
-                        <span class="portfolio-num">00</span>
-                    </div>
-                </div>
-                <div class="portfolio-card">
-                    <img src="./assets/portfolio-3.jpg" onerror="this.src='https://placehold.co/400x500/e0e0e0/555555?text=4+Degrees'" alt="4 Degrees" class="card-bg">
-                    <div class="portfolio-info">
-                        <span class="portfolio-title">4 Degrees</span>
-                        <span class="portfolio-num">00</span>
-                    </div>
-                </div>
-                <div class="portfolio-card">
-                    <img src="./assets/portfolio-4.jpg" onerror="this.src='https://placehold.co/400x500/e0e0e0/555555?text=Ezaar'" alt="Ezaar" class="card-bg">
-                    <div class="portfolio-info">
-                        <span class="portfolio-title">Ezaar</span>
-                        <span class="portfolio-num">00</span>
-                    </div>
-                </div>
-                <div class="portfolio-card">
-                    <img src="./assets/portfolio-5.jpg" onerror="this.src='https://placehold.co/400x500/e0e0e0/555555?text=The+Dosa+Story'" alt="The Dosa Story" class="card-bg">
-                    <div class="portfolio-info">
-                        <span class="portfolio-title">The Dosa Story</span>
-                        <span class="portfolio-num">00</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="portfolio-footer container">
-            <div class="portfolio-tags">
-                xtrn, indian cart, old mercara, cookery trails, ezaar, the dosa story
-            </div>
-            <div class="portfolio-scrollbar-wrapper">
-                <div class="custom-scrollbar-container">
-                    <div class="custom-track">
-                        <div class="custom-thumb" id="portfolio-thumb"></div>
-                    </div>
-                </div>
-                <div class="scroll-option-text">scroll option</div>
-            </div>
-            <div class="spacer"></div>
-        </div>
-    </section>
 
     <section class="manifesto container">
         <h2>Story Led, Design First,<br>Detail Driven</h2>
         <p class="manifesto-subtitle">Trusted by over <strong>60+ clients</strong> in a year</p>
-        <p class="pink-text manifesto-boast">(boasting our service)</p>
     </section>
 
     <section class="split-images">

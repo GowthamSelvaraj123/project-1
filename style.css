@@ -254,7 +254,6 @@ h2 {
 
 /* Services Section Updated */
 .services {
-    padding-top: 3rem;
     padding-bottom: 5rem;
 }
 
@@ -435,22 +434,25 @@ h2 {
 
 /* Recently Saved (Works) Section */
 .recently-saved {
-    padding: 6rem 0;
+    padding: 3rem 0;
 }
 
 .underlined-title {
     font-size: 3rem;
     font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: #007bff;
-    text-underline-offset: 8px;
-    text-decoration-thickness: 4px;
 }
 
 .portfolio-content {
     position: relative;
     width: 100%;
     margin-top: 3rem;
+    --container-padding: 5vw;
+}
+
+@media (min-width: 1400px) {
+    .portfolio-content {
+        --container-padding: calc((100vw - 1400px) / 2 + 5vw);
+    }
 }
 
 .portfolio-carousel {
@@ -459,7 +461,8 @@ h2 {
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    padding: 0 max(5vw, calc((100vw - 1400px) / 2 + 5vw));
+    padding-left: var(--container-padding);
+    padding-right: 5vw;
 }
 
 .portfolio-carousel::-webkit-scrollbar {
@@ -468,8 +471,8 @@ h2 {
 
 .portfolio-card {
     position: relative;
-    width: 400px;
-    height: 500px;
+    width: calc((100vw - var(--container-padding) - 60px) / 3.1);
+    aspect-ratio: 4 / 5;
     flex-shrink: 0;
     border-radius: 1.5rem;
     overflow: hidden;
@@ -509,15 +512,8 @@ h2 {
 .portfolio-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 3rem;
-}
-
-.portfolio-tags {
-    flex: 1;
-    color: #ff3366;
-    font-size: 0.9rem;
-    font-weight: 500;
 }
 
 .portfolio-scrollbar-wrapper {
@@ -530,10 +526,6 @@ h2 {
 .scroll-option-text {
     color: #ff3366;
     font-size: 0.9rem;
-}
-
-.spacer {
-    flex: 1;
 }
 
 /* Manifesto Section */
@@ -716,7 +708,7 @@ h2 {
 /* Contact Section */
 .contact {
     display: flex;
-    padding: 6rem 5%;
+    padding: 0rem 5%;
     gap: 4rem;
 }
 
@@ -726,7 +718,6 @@ h2 {
     padding: 3rem;
     border-radius: 1rem;
     flex: 1;
-    max-width: 500px;
 }
 
 .form-title {
@@ -785,7 +776,7 @@ h2 {
 }
 
 .contact-text {
-    flex: 1.2;
+    flex: 1.4;
 }
 
 .contact-text h2 {
