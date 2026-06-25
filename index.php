@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saved As - Creative Agency</title>
-    <!-- Use Inter font for a clean, modern aesthetic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <header class="navbar">
-        <div class="logo">Saved As</div>
-        <nav class="nav-links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Get in touch</a>
-        </nav>
-    </header>
+<?php 
+$pageTitle = "Saved As - Creative Agency";
+$currentPage = "index"; 
+include 'header.php'; 
+?>
 
     <section class="hero container">
         <div class="hero-left">
@@ -249,8 +231,6 @@
 
                 const index = parseInt(activeCard.dataset.index);
 
-                // (Thumb translation logic moved to actual scroll event listener)
-
                 // Position panel dynamically based on active card
                 const cardRect = activeCard.getBoundingClientRect();
                 const containerRect = servicesContent.getBoundingClientRect();
@@ -430,78 +410,10 @@
                     comes that same energy forward, now shaped with clarity, experience, and a strong shared point of
                     view.</p>
 
-                <a href="#" class="meet-team">Meet the team <span class="arrow-circle">&#8594;</span></a>
+                <a href="about.php" class="meet-team">Meet the team <span class="arrow-circle">&#8594;</span></a>
             </div>
         </div>
     </section>
 
-    <section class="contact container" id="contact">
-        <div class="contact-form-container">
-            <h3 class="form-title">Saved As</h3>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Your name">
-                </div>
-                <div class="form-group">
-                    <label for="email">email</label>
-                    <input type="email" id="email" placeholder="Enter your mail">
-                </div>
-                <div class="form-group">
-                    <label for="message">message</label>
-                    <textarea id="message" placeholder="Type your message"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">submit</button>
-            </form>
-        </div>
-        <div class="contact-text">
-            <h2>Get in touch</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.</p>
-            <a href="#" class="contact-link">Contact us <span class="arrow-circle">&#8594;</span></a>
-        </div>
-    </section>
-
-    <footer class="site-footer">
-        <div class="footer-top container">
-            <div class="footer-left">
-                <p class="footer-desc">Lorem ipsum dolor sit amet,<br>consectetur</p>
-                <div class="contact-info">
-                    <p><span class="label">(EMAIL)</span> officialsavedas@gmail.com</p>
-                    <p><span class="label">(PHONE)</span> +91 0123456789</p>
-                </div>
-            </div>
-            <div class="footer-right">
-                <p class="nav-label">NAVIGATION</p>
-                <ul class="footer-nav">
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">WORKS</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="#">CONTACT</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-middle container">
-            <p class="copyright">2026 ALL RIGHTS RESERVED</p>
-            <div class="socials">
-                <span class="social-label">Socials</span>
-                <a href="#">Linkedin</a>
-                <a href="#">Instagram</a>
-                <a href="#">Behance</a>
-                <a href="#">Twitter/x</a>
-            </div>
-        </div>
-
-        <div class="footer-bottom container">
-            <h1 class="big-footer-logo">Saved As &copy;</h1>
-            <p class="animated-text">(Animated)</p>
-            <div class="footer-links">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms of service</a>
-            </div>
-        </div>
-    </footer>
-</body>
-
-</html>
+<?php include 'get_in_touch.php'; ?>
+<?php include 'footer.php'; ?>

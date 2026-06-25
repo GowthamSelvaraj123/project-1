@@ -1,0 +1,369 @@
+<?php
+$pageTitle = "About Us — Saved As Creative Agency";
+$currentPage = "about";
+include 'header.php';
+?>
+
+<!-- About Hero -->
+<section class="about-hero-exact container mx-auto">
+    <h1 class="about-hero-title-exact">About us</h1>
+    <div class="about-hero-text-exact">
+        <p>We're a design-first, creative-first house built on the <br /> belief that good stories deserve thoughtful
+            execution.</p>
+    </div>
+</section>
+
+<!-- BTS CLIPS Banner -->
+<div class="black-banner-exact bts-banner-exact">
+    <h2>BTS CLIPS</h2>
+</div>
+
+<!-- Visual Storytellers Section -->
+<section class="visual-story-section container mx-auto">
+    <div class="visual-cards-grid">
+        <div class="visual-card-left">
+            <div class="visual-card-top">
+                At our core, we're<br>
+                <span class="pink-text-exact">visual storytellers.</span>
+            </div>
+            <div class="visual-card-bottom">
+                We work with brands that care about how they show up, not just online, but everywhere. Our audience
+                meets there.
+            </div>
+        </div>
+        <div class="visual-card-right">
+            <div class="works-slider-viewport" id="worksViewport">
+                <div class="works-slider-track" id="worksTrack">
+                    <div class="works-slide">WORKS IMG 1</div>
+                    <div class="works-slide">WORKS IMG 2</div>
+                    <div class="works-slide">WORKS IMG 3</div>
+                </div>
+            </div>
+            <div class="slider-controls-exact">
+                <div class="slider-track-exact" id="sliderTrack">
+                    <div class="slider-thumb-exact" id="sliderThumb"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            document.addEventListener('DOMContentLoaded', function () {
+                var viewport = document.getElementById('worksViewport');
+                var track = document.getElementById('worksTrack');
+                var scrollTrack = document.getElementById('sliderTrack');
+                var scrollThumb = document.getElementById('sliderThumb');
+                if (!viewport || !track || !scrollTrack || !scrollThumb) return;
+
+                var slides = track.querySelectorAll('.works-slide');
+                var totalSlides = slides.length;
+                var currentIndex = 0;
+
+                function getSlideWidth() {
+                    return viewport.offsetWidth;
+                }
+
+                function goToSlide(index, animate) {
+                    if (index < 0) index = 0;
+                    if (index >= totalSlides) index = totalSlides - 1;
+                    currentIndex = index;
+                    var offset = -index * getSlideWidth();
+                    track.style.transition = animate ? 'transform 0.4s ease' : 'none';
+                    track.style.transform = 'translateX(' + offset + 'px)';
+                    updateScrollThumb();
+                }
+
+                function updateScrollThumb() {
+                    if (totalSlides <= 1) return;
+                    var trackW = scrollTrack.offsetWidth;
+                    var thumbW = scrollThumb.offsetWidth;
+                    var maxTravel = trackW - thumbW - 16;
+                    var pct = currentIndex / (totalSlides - 1);
+                    scrollThumb.style.transition = 'transform 0.3s ease';
+                    scrollThumb.style.transform = 'translateX(' + (pct * maxTravel) + 'px)';
+                }
+
+                // --- Click on scrollbar track to jump ---
+                scrollTrack.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var rect = scrollTrack.getBoundingClientRect();
+                    var clickX = e.clientX - rect.left;
+                    var pct = clickX / rect.width;
+                    var targetSlide = Math.round(pct * (totalSlides - 1));
+                    goToSlide(targetSlide, true);
+                });
+
+                // --- Drag the scrollbar thumb ---
+                var thumbDragging = false;
+                var thumbStartX = 0;
+                var thumbStartTranslate = 0;
+
+                scrollThumb.addEventListener('mousedown', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    thumbDragging = true;
+                    thumbStartX = e.clientX;
+                    var cs = window.getComputedStyle(scrollThumb);
+                    var matrix = cs.transform;
+                    if (matrix && matrix !== 'none') {
+                        var vals = matrix.match(/matrix.*\((.+)\)/);
+                        thumbStartTranslate = vals ? parseFloat(vals[1].split(',')[4]) : 0;
+                    } else {
+                        thumbStartTranslate = 0;
+                    }
+                    scrollThumb.style.transition = 'none';
+                    document.body.style.userSelect = 'none';
+                });
+
+                document.addEventListener('mousemove', function (e) {
+                    if (!thumbDragging) return;
+                    e.preventDefault();
+                    var dx = e.clientX - thumbStartX;
+                    var trackW = scrollTrack.offsetWidth;
+                    var thumbW = scrollThumb.offsetWidth;
+                    var maxTravel = trackW - thumbW - 16;
+                    var newPos = Math.min(Math.max(thumbStartTranslate + dx, 0), maxTravel);
+                    scrollThumb.style.transform = 'translateX(' + newPos + 'px)';
+
+                    // Move slides to match
+                    var pct = newPos / maxTravel;
+                    var slideOffset = -pct * (totalSlides - 1) * getSlideWidth();
+                    track.style.transition = 'none';
+                    track.style.transform = 'translateX(' + slideOffset + 'px)';
+                });
+
+                document.addEventListener('mouseup', function () {
+                    if (!thumbDragging) return;
+                    thumbDragging = false;
+                    document.body.style.userSelect = '';
+                    // Snap to nearest slide
+                    var cs = window.getComputedStyle(track);
+                    var matrix = cs.transform;
+                    var currentOffset = 0;
+                    if (matrix && matrix !== 'none') {
+                        var vals = matrix.match(/matrix.*\((.+)\)/);
+                        currentOffset = vals ? parseFloat(vals[1].split(',')[4]) : 0;
+                    }
+                    var nearest = Math.round(Math.abs(currentOffset) / getSlideWidth());
+                    goToSlide(nearest, true);
+                });
+
+                // --- Drag on slides (swipe) ---
+                var slideDragging = false;
+                var slideStartX = 0;
+                var slideStartOffset = 0;
+
+                viewport.addEventListener('mousedown', function (e) {
+                    if (thumbDragging) return;
+                    slideDragging = true;
+                    viewport.style.cursor = 'grabbing';
+                    slideStartX = e.clientX;
+                    var cs = window.getComputedStyle(track);
+                    var matrix = cs.transform;
+                    if (matrix && matrix !== 'none') {
+                        var vals = matrix.match(/matrix.*\((.+)\)/);
+                        slideStartOffset = vals ? parseFloat(vals[1].split(',')[4]) : 0;
+                    } else {
+                        slideStartOffset = 0;
+                    }
+                    track.style.transition = 'none';
+                });
+
+                document.addEventListener('mousemove', function (e) {
+                    if (!slideDragging) return;
+                    e.preventDefault();
+                    var dx = e.clientX - slideStartX;
+                    var newOffset = slideStartOffset + dx;
+                    // Clamp
+                    var maxOffset = 0;
+                    var minOffset = -(totalSlides - 1) * getSlideWidth();
+                    newOffset = Math.max(Math.min(newOffset, maxOffset), minOffset);
+                    track.style.transform = 'translateX(' + newOffset + 'px)';
+
+                    // Update thumb position live
+                    var pct = Math.abs(newOffset) / ((totalSlides - 1) * getSlideWidth());
+                    var trackW = scrollTrack.offsetWidth;
+                    var thumbW = scrollThumb.offsetWidth;
+                    var maxTravel = trackW - thumbW - 16;
+                    scrollThumb.style.transition = 'none';
+                    scrollThumb.style.transform = 'translateX(' + (pct * maxTravel) + 'px)';
+                });
+
+                document.addEventListener('mouseup', function () {
+                    if (!slideDragging) return;
+                    slideDragging = false;
+                    viewport.style.cursor = 'grab';
+                    // Snap to nearest
+                    var cs = window.getComputedStyle(track);
+                    var matrix = cs.transform;
+                    var currentOffset = 0;
+                    if (matrix && matrix !== 'none') {
+                        var vals = matrix.match(/matrix.*\((.+)\)/);
+                        currentOffset = vals ? parseFloat(vals[1].split(',')[4]) : 0;
+                    }
+                    var nearest = Math.round(Math.abs(currentOffset) / getSlideWidth());
+                    goToSlide(nearest, true);
+                });
+
+                // Touch support
+                var touchStartX = 0;
+                var touchStartOffset = 0;
+
+                viewport.addEventListener('touchstart', function (e) {
+                    touchStartX = e.touches[0].clientX;
+                    var cs = window.getComputedStyle(track);
+                    var matrix = cs.transform;
+                    if (matrix && matrix !== 'none') {
+                        var vals = matrix.match(/matrix.*\((.+)\)/);
+                        touchStartOffset = vals ? parseFloat(vals[1].split(',')[4]) : 0;
+                    } else {
+                        touchStartOffset = 0;
+                    }
+                    track.style.transition = 'none';
+                }, { passive: true });
+
+                viewport.addEventListener('touchmove', function (e) {
+                    var dx = e.touches[0].clientX - touchStartX;
+                    var newOffset = touchStartOffset + dx;
+                    var maxOffset = 0;
+                    var minOffset = -(totalSlides - 1) * getSlideWidth();
+                    newOffset = Math.max(Math.min(newOffset, maxOffset), minOffset);
+                    track.style.transform = 'translateX(' + newOffset + 'px)';
+                }, { passive: true });
+
+                viewport.addEventListener('touchend', function () {
+                    var cs = window.getComputedStyle(track);
+                    var matrix = cs.transform;
+                    var currentOffset = 0;
+                    if (matrix && matrix !== 'none') {
+                        var vals = matrix.match(/matrix.*\((.+)\)/);
+                        currentOffset = vals ? parseFloat(vals[1].split(',')[4]) : 0;
+                    }
+                    var nearest = Math.round(Math.abs(currentOffset) / getSlideWidth());
+                    goToSlide(nearest, true);
+                });
+
+                // Init
+                goToSlide(0, false);
+                window.addEventListener('resize', function () { goToSlide(currentIndex, false); });
+            });
+        })();
+    </script>
+
+</section>
+
+<!-- Building Something Bigger -->
+<section class="building-bigger-section container mx-auto">
+    <h3 class="building-bigger-title">But beyond the work, we're<br>building something bigger.</h3>
+    <p class="building-bigger-sub">We're a creative house with an aim to build a community. A space<br>for like-minded
+        people who value design, ideas, and collaboration.</p>
+
+    <div class="two-img-grid-exact">
+        <div class="img-col-exact">
+            <div class="img-placeholder-exact left-img-exact">IMG</div>
+            <p class="img-caption-exact">We care about working closely with our clients,<br>understanding their world,
+                and creating work that feels<br>aligned rather than forced.</p>
+        </div>
+        <div class="img-col-exact">
+            <div class="img-placeholder-exact right-img-exact">IMG</div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Founders Banner -->
+<div class="black-banner-exact">
+    <h2>Our Founders</h2>
+</div>
+
+<!-- Founders Stack -->
+<section class="founders-stack-exact container mx-auto">
+    <div class="founder-item-exact">
+        <div class="founder-card-exact blue-top">
+            <div class="founder-card-header">
+                <div class="founder-name-col">
+                    <span class="f-name">Barkha Hemsdev</span>
+                    <span class="f-role">co founder</span>
+                </div>
+                <div class="f-pills"><span></span><span></span></div>
+            </div>
+            <div class="founder-card-img">IMG</div>
+        </div>
+    </div>
+    <p class="founder-desc-exact">With roots in fashion media and digital direction, Barkha leads creative
+        strategy—shaping ideas, narratives, and brand worlds for luxury, lifestyle, and sustainability-led brands.
+    </p>
+    <div class="founder-item-exact">
+        <div class="founder-card-exact purple-top">
+            <div class="founder-card-header">
+                <div class="founder-name-col">
+                    <span class="f-name">Subangi Anand</span>
+                    <span class="f-role">co founder</span>
+                </div>
+                <div class="f-pills"><span></span><span></span></div>
+            </div>
+            <div class="founder-card-img">IMG</div>
+        </div>
+    </div>
+    <p class="founder-desc-exact">With a background in marketing and graphic design, Subangi<br>turns ideas into
+        visual systems—translating brand vision into<br>stories that connect across retail and F&B spaces.</p>
+</section>
+
+<!-- Meet the team -->
+<section class="team-section-exact container mx-auto">
+    <div class="team-wrapper-exact">
+        <div class="team-header-flex">
+            <div class="team-header-left">
+                <h2>Meet the team</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit.</p>
+            </div>
+            <div class="team-header-right">
+                <button class="join-us-btn">Join us</button>
+            </div>
+        </div>
+
+        <div class="team-grid-3">
+            <div class="team-member-card orange-top">
+                <div class="tm-top">
+                    <div class="f-pills" style="justify-content: flex-end; margin-bottom: 1rem;">
+                        <span></span><span></span>
+                    </div>
+                    <span class="tm-name">Name</span>
+                    <span class="tm-role">Graphic Director</span>
+                    <p class="tm-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                    </p>
+                </div>
+                <div class="tm-img">IMG</div>
+            </div>
+
+            <div class="team-member-card pink-top">
+                <div class="tm-top">
+                    <div class="f-pills" style="justify-content: flex-end; margin-bottom: 1rem;">
+                        <span></span><span></span>
+                    </div>
+                    <span class="tm-name">Name</span>
+                    <span class="tm-role">Visual Designer</span>
+                    <p class="tm-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                    </p>
+                </div>
+                <div class="tm-img">IMG</div>
+            </div>
+
+            <div class="team-member-card green-top">
+                <div class="tm-top">
+                    <div class="f-pills" style="justify-content: flex-end; margin-bottom: 1rem;">
+                        <span></span><span></span>
+                    </div>
+                    <span class="tm-name">Name</span>
+                    <span class="tm-role">Manager</span>
+                    <p class="tm-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                    </p>
+                </div>
+                <div class="tm-img">IMG</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php include 'get_in_touch.php'; ?>
+<?php include 'footer.php'; ?>

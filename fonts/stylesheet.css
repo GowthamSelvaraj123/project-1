@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-Black.woff2') format('woff2'),
+        url('Delight-Black.woff') format('woff'),
+        url('Delight-Black.ttf') format('truetype'),
+        url('Delight-Black.svg#Delight-Black') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-Bold.woff2') format('woff2'),
+        url('Delight-Bold.woff') format('woff'),
+        url('Delight-Bold.ttf') format('truetype'),
+        url('Delight-Bold.svg#Delight-Bold') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-ExtraBold.woff2') format('woff2'),
+        url('Delight-ExtraBold.woff') format('woff'),
+        url('Delight-ExtraBold.ttf') format('truetype'),
+        url('Delight-ExtraBold.svg#Delight-ExtraBold') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-ExtraLight.woff2') format('woff2'),
+        url('Delight-ExtraLight.woff') format('woff'),
+        url('Delight-ExtraLight.ttf') format('truetype'),
+        url('Delight-ExtraLight.svg#Delight-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-Light.woff2') format('woff2'),
+        url('Delight-Light.woff') format('woff'),
+        url('Delight-Light.ttf') format('truetype'),
+        url('Delight-Light.svg#Delight-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-Medium.woff2') format('woff2'),
+        url('Delight-Medium.woff') format('woff'),
+        url('Delight-Medium.ttf') format('truetype'),
+        url('Delight-Medium.svg#Delight-Medium') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-Regular.woff2') format('woff2'),
+        url('Delight-Regular.woff') format('woff'),
+        url('Delight-Regular.ttf') format('truetype'),
+        url('Delight-Regular.svg#Delight-Regular') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-SemiBold.woff2') format('woff2'),
+        url('Delight-SemiBold.woff') format('woff'),
+        url('Delight-SemiBold.ttf') format('truetype'),
+        url('Delight-SemiBold.svg#Delight-SemiBold') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-Thin.woff2') format('woff2'),
+        url('Delight-Thin.woff') format('woff'),
+        url('Delight-Thin.ttf') format('truetype'),
+        url('Delight-Thin.svg#Delight-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('Delight-Regular_1.woff2') format('woff2'),
+        url('Delight-Regular_1.woff') format('woff'),
+        url('Delight-Regular_1.ttf') format('truetype'),
+        url('Delight-Regular_1.svg#Delight-Regular') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
